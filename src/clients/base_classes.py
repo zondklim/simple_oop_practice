@@ -3,8 +3,6 @@ from enum import Enum, auto
 
 from .customer import Customer
 
-import hashlib
-from datetime import datetime 
 import random
 
 
@@ -13,6 +11,14 @@ class AccountStatus(Enum):
     FROZEN = auto()
     CLOSED = auto()
 
+
+class Currency(Enum):
+    RUB = auto()
+    USD = auto()
+    EUR = auto()
+    KZT = auto()
+    CNY = auto()
+    
 
 class AbstractAccount(ABC):
     def __init__(
@@ -42,10 +48,3 @@ class AbstractAccount(ABC):
     def _generate_card_number(self, ):
         """Creating 16 digests card number"""
         self.card_number =  ''.join([str(random.randrange(10)) if i % 5 != 0 else ' ' for i in range(1, 20)])
-    
-    def _generate_id(self, ) -> None:
-        """Creating id from customer params and time.now as solt"""
-        info_string = self.owner_info.concat_to_str()
-        curr_dt = datetime.now().strftime("%Y%m%d%H%M")
-        
-        self.id = hashlib.md5((info_string + curr_dt).encode()).hexdigest()
