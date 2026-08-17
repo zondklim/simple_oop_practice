@@ -30,7 +30,7 @@ class AbstractAccount(ABC):
         
         self._generate_card_number()
         self.account_status: AccountStatus = AccountStatus.ACTIVE
-        self._balance: float = 0.
+        self._balance: float|int = .0
         
     
     @abstractmethod
