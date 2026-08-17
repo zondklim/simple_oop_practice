@@ -6,14 +6,14 @@ class AccountErrors(Exception):
 
 class AccountFrozenError(AccountErrors):
     def __init__(self, ):
-        super.__init__(
+        super().__init__(
             "Your account status if Frozen. You can't provide operations. Pleas contact your support."
         )
 
 
 class AccountClosedError(AccountErrors):
     def __init__(self, ):
-        super.__init__(
+        super().__init__(
             "Your account status if Closed. You can't provide operations. Pleas create new account."
         )  
 
@@ -21,7 +21,7 @@ class AccountClosedError(AccountErrors):
 class InvalidOperationError(AccountErrors):
     def __init__(self, operation: str):
     
-        super.__init__(
+        super().__init__(
             f"Sorry operation {operation} is unsupported. Please choose the other one."
         ) 
     
@@ -32,6 +32,6 @@ class InsufficientFundsError(AccountErrors):
         balance: float|int,
         amount: float|int
     ):
-        super.__init__(
+        super().__init__(
             f"Cannot withdraw {amount}: balance is only {balance}"
         )

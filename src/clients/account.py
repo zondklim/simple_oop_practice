@@ -34,7 +34,7 @@ class BankAccount(AbstractAccount):
     def deposit(self, amount: float|int):
         
         self._validate_operation('deposit', amount)
-        self.deposit += amount
+        self._balance += amount
         
     def withdraw(self, amount: float|int):
         
@@ -87,13 +87,13 @@ class BankAccount(AbstractAccount):
         if not isinstance(self.owner_info, Customer):
             raise TypeError('Costomer inf must be instance of Customer.')
         
-        if not self.owner_info.name or isinstance(self.owner_info.name, str):
+        if not self.owner_info.name or not isinstance(self.owner_info.name, str):
             raise ValueError('Customer name must be string lengh more than 0.')
         
-        if not self.owner_info.surname or isinstance(self.owner_info.surname, str):
+        if not self.owner_info.surname or not isinstance(self.owner_info.surname, str):
             raise ValueError('Customer surname must be string lengh more than 0.')
         
-        if not self.owner_info.surname or isinstance(self.owner_info.surname, str):
+        if not self.owner_info.surname or not isinstance(self.owner_info.surname, str):
             raise ValueError('Customer date_of_birth must be string lengh equal 10.')
         
         if not isinstance(self.currency, Currency):
@@ -103,14 +103,14 @@ class BankAccount(AbstractAccount):
             
         self.check_account_status()
                 
-        if self.operations_is_banned:
-            raise InvalidOperationError('{operation_name}')
-        elif self.account_status == AccountStatus.FROZEN:
+        if self.account_status == AccountStatus.FROZEN:
             raise AccountFrozenError
         elif self.account_status == AccountStatus.CLOSED:
             raise AccountClosedError   
+        elif self.operations_is_banned:
+                raise InvalidOperationError(f'{operation_name}')
 
         if not isinstance(amount, (float, int)):
-            raise ValueError('Amount for {operation_name} must be float or intager.')
+            raise ValueError(f'Amount for {operation_name} must be float or intager.')
         elif amount <= 0:
             raise InvalidOperationError(f'{operation_name} for {amount}.') 
