@@ -46,5 +46,5 @@ class AbstractAccount(ABC):
         pass
     
     def _generate_card_number(self, ):
-        """Creating 16 digests card number"""
+        """Creates a 16-digit card number"""
         self.card_number =  ''.join([str(random.randrange(10)) if i % 5 != 0 else ' ' for i in range(1, 20)])

@@ -7,22 +7,22 @@ class AccountErrors(Exception):
 class AccountFrozenError(AccountErrors):
     def __init__(self, ):
         super().__init__(
-            "Your account status if Frozen. You can't provide operations. Pleas contact your support."
+            "Your account status is Frozen. You can't perform operations. Please contact support."
         )
 
 
 class AccountClosedError(AccountErrors):
     def __init__(self, ):
         super().__init__(
-            "Your account status if Closed. You can't provide operations. Pleas create new account."
-        )  
+            "Your account status is Closed. You can't perform operations. Please create a new account."
+        )
 
     
 class InvalidOperationError(AccountErrors):
     def __init__(self, operation: str):
     
         super().__init__(
-            f"Sorry operation {operation} is unsupported. Please choose the other one."
+            f"Sorry, operation {operation} is unsupported. Please choose another one."
         ) 
     
     
