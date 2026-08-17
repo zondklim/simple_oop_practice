@@ -11,6 +11,7 @@ from .errors import (
 )
 
 class BankAccount(AbstractAccount):
+    __name__ = 'Standart Bank Account'
     
     def __init__(
         self,
@@ -27,6 +28,9 @@ class BankAccount(AbstractAccount):
         if not self.card_number:
             self._generate_id
     
+    def __str__(self):
+        return self.get_account_info()
+    
     def deposit(self, amount: float|int):
         
         self._validate_operation('deposit', amount)
@@ -40,8 +44,13 @@ class BankAccount(AbstractAccount):
         
         self._balance -= amount
     
-    def get_account_info(self, ):
-        pass
+    def get_account_info(self, ) -> str:
+        return f"Acount is {BankAccount.__name__}\
+                \nAccount Owner Name: {self.owner_info.name} \
+                \nAccount Owner Surname: {self.owner_info.surname}\
+                \nCard Number is: **** **** **** {self.card_number[-4:]} \
+                \nAccount Status is: {self.account_status}\
+                \nAcount Balance: {self._balance} {self.currency}"
     
     def update_account_status(self, new_status: AccountStatus):
         
