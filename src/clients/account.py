@@ -35,6 +35,9 @@ class BankAccount(AbstractAccount):
     def withdraw(self, amount: float|int):
         
         self._validate_operation('withdraw', amount)
+        if self._balance < amount:
+            raise InsufficientFundsError(self._balance, amount)
+        
         self._balance -= amount
     
     def get_account_info(self, ):
